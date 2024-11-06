@@ -1,0 +1,118 @@
+Card Game
+There is a set of N.
+N cards where each card is numbered 1.
+1 to N.
+
+
+Chef throws a card numbered X.
+Find the number of ways, Chefina can chose a card from the remaining deck such that, the sum of chosen card and 
+X where X is even.
+
+Input Format
+The first line of input will contain a single integer T
+T, denoting the number of test cases.
+Each test case consists of two space-separated integers 
+N
+N and 
+X
+X — the number of cards and the card thrown by Chef.
+Output Format
+For each test case, output on a new line, the number of ways, Chefina can chose a card from the remaining deck such that, the sum of chosen card and 
+X
+X is even.
+
+Constraints
+1
+≤
+T
+≤
+1
+0
+5
+1≤T≤10 
+5
+ 
+2
+≤
+N
+≤
+1000
+2≤N≤1000
+1
+≤
+X
+≤
+N
+1≤X≤N
+Sample 1:
+Input
+Output
+3
+3 1
+2 2
+5 4
+1
+0
+1
+Explanation:
+Test case 
+1
+1: Chefina can only chose card numbered 
+3
+3 such that the sum is 
+3
++
+1
+=
+4
+3+1=4, which is even.
+
+Test case 
+2
+2: There are two cards and Chef throws card numbered 
+2
+2. Thus, Chefina cannot chose any card such that sum is even.
+
+Test case 
+3
+3: Chefina can only chose card numbered 
+2
+2 such that the sum is 
+4
++
+2
+=
+6
+4+2=6, which is even.
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        int even, odd;
+        cin>>n>>x;
+        if(n%2==0){
+            even = n/2;
+            odd = n/2;
+        } else{
+            even = (n)/2;
+            odd = (n+1)/2;
+        }
+        
+        if(x%2==0){
+            cout<<(even-1);
+        } else{
+            cout<<(odd-1);
+        }
+            
+     cout<<endl;
+    }
+
+}
+
+
