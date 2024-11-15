@@ -1,0 +1,45 @@
+Find Remainder
+Write a program to find the remainder when an integer A is divided by an integer B.
+
+Input
+
+The first line contains an integer T, the total number of test cases. Then T lines follow, each line contains two Integers A and B.
+
+Output
+For each test case, find the remainder when A is divided by B, and display it in a new line.
+
+Constraints
+1 ≤ T ≤ 1000
+1 ≤ A,B ≤ 10000
+Sample 1:
+Input
+Output
+3 
+1 2
+100 200
+40 15
+1
+100
+10
+
+
+
+import java.util.Scanner;
+
+class Find_remainder
+{
+	public static void main(String args[])
+	{
+		int test=0,divi=0,numb=0;
+		int i=0,rema=0;
+		Scanner sc=new Scanner(System.in);
+		test=sc.nextInt();
+		for(i=0;i<test;i++)
+		{
+			numb=sc.nextInt();
+			divi=sc.nextInt();
+			rema=numb%divi;
+			System.out.println(rema);
+		}
+	}
+}
