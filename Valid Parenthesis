@@ -1,0 +1,146 @@
+Valid Parenthesis
+If you are new to stacks and queues, or want a refresher on them, start with our Learn Stacks and Queues course
+
+Give string a 
+S
+S consisting of only 
+(
+( and 
+)
+). Find whether 
+S
+S is a valid parenthesis string.
+
+Note: A valid parentheses string is defined as:
+
+Empty string is valid.
+If 
+P
+P is valid, 
+(
+P
+)
+(P) is also valid.
+If 
+P
+P and 
+Q
+Q are valid, 
+P
+Q
+PQ is also valid.
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of a single line of input, containing string 
+S
+S.
+Output Format
+For each test case, output 
+1
+1 if the given string is a valid parenthesis, or output 
+0
+0 otherwise.
+
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+1
+≤
+∣
+S
+∣
+≤
+1
+0
+5
+1≤∣S∣≤10 
+5
+ 
+The sum of 
+∣
+S
+∣
+∣S∣ over all test cases won't exceed 
+2
+⋅
+1
+0
+5
+2⋅10 
+5
+ .
+Sample 1:
+Input
+Output
+3
+()(())
+(()()
+))((
+1
+0
+0
+Explanation:
+Test case 
+1
+1: 
+(
+)
+(
+(
+)
+)
+()(()) will be valid parenthesis.
+
+Test case 
+2
+2: 
+(
+(
+)
+(
+)
+(()() will not be valid parenthesis.
+
+Test case 
+3
+3: 
+)
+)
+(
+(
+))(( will not be valid parenthesis.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Codechef
+{
+  public static void main(String[] args) throws java.lang.Exception
+    {
+        List < Integer > list = new ArrayList < > ();
+        Scanner obj = new Scanner(System.in);
+        int n = obj.nextInt();
+        obj.nextLine();
+        for (int i = 0; i < n; i++) {
+            Stack < Character > stack = new Stack < > ();
+            String str = obj.nextLine();
+            for (char ch: str.toCharArray()) {
+                if (stack.isEmpty()) stack.push(ch);
+                else if (ch == ')' && stack.peek() == '(') stack.pop();
+                else stack.push(ch);
+            }
+            if (stack.isEmpty()) list.add(1);
+            else list.add(0);
+
+        }
+        for (int i: list) {
+            System.out.println(i);
+        }
+    }
+
+}
