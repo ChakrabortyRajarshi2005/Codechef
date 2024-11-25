@@ -1,0 +1,138 @@
+Deletion in a Heap
+Deletion in MIN-HEAP
+Here's a step-by-step process for deleting the minimum element (root) from a min-heap:
+
+Remove the Root:
+
+Swap the root with the last leaf (the rightmost leaf of the last level).
+Remove the last leaf.
+Heapify Down:
+
+Compare the new root with its children.
+Swap the root with the smaller of its two children (maintaining the min-heap property).
+Repeat this process recursively until the min-heap property is restored.
+Here's a simplified pseudocode for deletion in a min-heap:
+
+Function deleteMin():
+    If heap is empty:
+        Return an error (heap is empty)
+    
+    Swap heap[0] (root) with heap[size - 1] (last leaf)
+    Remove the last element from the heap
+
+    HeapifyDown(0)  // Start the heapify process from the root
+
+Function HeapifyDown(index):
+    leftChild = 2 * index + 1
+    rightChild = 2 * index + 2
+    smallest = index
+
+    If leftChild < size and heap[leftChild] < heap[smallest]:
+        smallest = leftChild
+
+    If rightChild < size and heap[rightChild] < heap[smallest]:
+        smallest = rightChild
+
+    If smallest != index:
+        Swap heap[index] with heap[smallest]
+        HeapifyDown(smallest)  // Recursively heapify the affected subtree
+Task
+Given a Min-Heap
+First line contains an integer N, the length of Min-Heap
+Second line contains N elements of the heap a1, a2, a3, a4
+Perform deletion operation in this heap.
+Delete the smallest element, and print the heap array, until the heap is empty.
+Sample 1:
+Input
+Output
+5
+1 2 4 5 3
+2 3 4 5 
+3 5 4 
+4 5 
+5
+
+import java.util.*;
+
+class MinHeap {
+    private List<Integer> heap;
+
+    // Constructor to initialize the heap with given elements
+    public MinHeap(List<Integer> elements) {
+        this.heap = new ArrayList<>(elements);
+        buildHeap();
+    }
+
+    // Function to heapify downwards from a given index
+    private void heapifyDown(int index) {
+        int size = heap.size();
+        int smallest = index;
+        int leftChild = 2 * index + 1;
+        int rightChild = 2 * index + 2;
+
+        if (leftChild < size && heap.get(leftChild) < heap.get(smallest)) {
+            smallest = leftChild;
+        }
+        if (rightChild < size && heap.get(rightChild) < heap.get(smallest)) {
+            smallest = rightChild;
+        }
+        if (smallest != index) {
+            Collections.swap(heap, index, smallest);
+            heapifyDown(smallest);  // Recursively heapify the affected subtree
+        }
+    }
+
+    // Function to build the min-heap by heapifying all non-leaf nodes
+    private void buildHeap() {
+        for (int i = (heap.size() / 2) - 1; i >= 0; i--) {
+            heapifyDown(i);
+        }
+    }
+
+    // Function to delete the minimum element (root) from the heap
+    public void deleteMin() {
+        if (heap.isEmpty()) return;
+
+        // Swap root with the last element and remove the last element
+        heap.set(0, heap.get(heap.size() - 1));
+        heap.remove(heap.size() - 1);
+
+        // Heapify down from the root to restore min-heap property
+        if (!heap.isEmpty()) {
+            heapifyDown(0);
+        }
+    }
+
+    // Function to print the current state of the heap
+    public void printHeap() {
+        for (int val : heap) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+
+    // Method to check if the heap is empty
+    public boolean isEmpty() {
+        return heap.isEmpty();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> elements = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            elements.add(sc.nextInt());
+        }
+
+        MinHeap minHeap = new MinHeap(elements);
+
+        // Perform deletion until the heap is empty
+        while (!minHeap.isEmpty()) {  // Use the public method to check if the heap is empty
+            minHeap.deleteMin();  // Delete the root (minimum element)
+            minHeap.printHeap();  // Print heap state after deletion
+        }
+        sc.close();
+    }
+}
