@@ -1,0 +1,39 @@
+And, OR, XOR
+Binary Number
+In our day-to-day life, we use decimal numbers. Decimal numbers are made up of 10 different digits. Binary numbers are made up of only two digits: 0 and 1. We can represent any decimal number as a binary number. For example, 1 is 1, 2 is 10, 3 is 11.
+
+Bit manipulation
+Bit manipulation involves manipulating individual bits within a binary representation of the data. This can be useful in various programming tasks, such as optimizing code and implementing certain algorithms.
+
+We use bitwise operators like AND, OR, and XOR to perform these operations.
+
+Bitwise AND (&): Performs a bitwise AND operation on each pair of corresponding bits. The result is 1 only if both bits are 1.
+           Example :   5 & 3 = 1  (Decimal representation)
+
+Bitwise OR (|): Performs a bitwise OR operation on each pair of corresponding bits. The result is 1 if at least one of the bits is 1.
+           Example :   5 | 3 = 7  (Decimal representation)
+                  
+Bitwise XOR (^): Performs a bitwise XOR (exclusive OR) operation on each pair of corresponding bits. The result is 1 if the bits are different.
+           Example :   5 ^ 3 = 6  (Decimal representation)
+                   
+Truth Table for the above operations.
+
+| 3 | 5 | 3 AND 5 | 3 OR 5 | 3 XOR 5 |
+|---|---|---------|--------|---------|
+| 1 | 1 |    1    |   1    |    0    |
+| 1 | 0 |    0    |   1    |    1    |
+| 0 | 1 |    0    |   1    |    1    |
+| 0 | 0 |    0    |   0    |    0    |
+
+            
+Task
+Perform the following operations (((3&5)|4)^7) and print the correct output.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+    public static void main(String[] args) {
+        System.out.println(((3 & 5) | 4) ^ 7);
+    }
+}
