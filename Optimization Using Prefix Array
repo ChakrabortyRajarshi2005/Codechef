@@ -1,0 +1,215 @@
+Optimization Using Prefix Array
+Given an array of length 
+n
+n, we need to perform 
+m
+m query over the array.
+
+In each query you need to find the sum of the element in the range 
+a
+a to 
+b
+b.
+
+Without using prefix sum
+For each query we need to iterate over the length of array, which will take 
+O
+(
+n
+)
+O(n) time.
+Total m query will make the time complexity 
+O
+(
+n
+∗
+m
+)
+O(n∗m)
+Using prefix sum
+Create an prefix sum array in 
+O
+(
+n
+)
+O(n) time.
+For each query we can find the sum of a range in 
+O
+(
+1
+)
+O(1) time, using 
+p
+r
+e
+f
+i
+x
+[
+b
+]
+−
+p
+r
+e
+f
+i
+x
+[
+a
+−
+1
+]
+prefix[b]−prefix[a−1] as the sum of range from 
+a
+a to 
+b
+b
+Total 
+m
+m query will make the time complexity 
+m
+∗
+O
+(
+1
+)
++
+O
+(
+n
+)
+m∗O(1)+O(n) => 
+O
+(
+m
+)
++
+O
+(
+n
+)
+O(m)+O(n)
+We can see above clearly how prefix sum help us to optimize the time complexity of our code.
+
+Task
+Use the optimized algorithm to solve the problem.
+
+Input Format
+First line contains an integer 
+N
+N, the length of the array.
+Second line contains 
+N
+N elements a1, a2, a3 . . . . ar
+N
+N.
+Third line gives an integer 
+K
+K, the number of queries.
+Next 
+K
+K line contains queries with integer a
+i
+i and b
+i
+i.
+Constraints
+1
+≤
+N
+≤
+100000
+1≤N≤100000
+1
+≤
+a
+r
+r
+i
+≤
+100000
+1≤arr 
+i
+​
+ ≤100000
+1
+≤
+K
+≤
+100000
+1≤K≤100000
+1
+≤
+a
+i
+,
+b
+i
+≤
+N
+1≤a 
+i
+​
+ ,b 
+i
+​
+ ≤N
+Sample 1:
+Input
+Output
+5
+1 2 3 4 5 
+5
+1 2
+2 3
+2 4
+4 4
+1 5
+3
+5
+9
+4
+15
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		  Scanner scanner = new Scanner(System.in);
+        int len = scanner.nextInt();
+        Vector<Integer> ar = new Vector<>();
+        for (int i = 0; i < len; i++) {
+            int n1 = scanner.nextInt();
+            ar.add(n1);
+        }
+        
+        long[] pre = new long[len];
+        for (int i = 0; i < len; i++) {
+            if (i != 0) {
+                pre[i] += pre[i - 1];
+            }
+            pre[i] += ar.get(i);
+        }
+        
+        int q = scanner.nextInt();
+        while (q-- > 0) {
+            int n1 = scanner.nextInt();
+            int n2 = scanner.nextInt();
+            n1--;
+            n2--;
+            if (n1 == 0) {
+                System.out.println(pre[n2]);
+            } else {
+                System.out.println(pre[n2] - pre[n1 - 1]);
+            }
+        }
+        
+        scanner.close();
+
+	}
+}
