@@ -1,0 +1,171 @@
+Attack on Kingdom
+Nightking wants to attack the kingdom and he really likes cold days. However, he doesn’t want to attack the kingdom on the coldest day, because it is obvious.
+
+Instead, he will attack the second coldest day. Given an array 
+A
+A of 
+N
+N distinct integers where 
+A
+i
+A 
+i
+​
+  represents the temperature forecast of the 
+i
+i-th day, You need to find the temperature of the day of the attack.
+
+Input Format
+First-line will contain 
+T
+T, the number of test cases. Then the test cases follow.
+Each test case contains two lines of input.
+The first line of every test case contains an integer 
+N
+N - the number of days
+The second line of every test case contains 
+N
+N integers - 
+A
+1
+,
+A
+2
+,
+.
+.
+,
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,..,A 
+N
+​
+  denoting the temperature forecast of the 
+i
+i-th day.
+Output Format
+For each test case, output in a single line - the answer to the 
+i
+i-th test case.
+
+Constraints
+1
+≤
+T
+≤
+1500
+1≤T≤1500
+2
+≤
+N
+≤
+2
+⋅
+1
+0
+5
+2≤N≤2⋅10 
+5
+ 
+1
+≤
+A
+i
+≤
+1
+0
+9
+1≤A 
+i
+​
+ ≤10 
+9
+ 
+Subtasks
+30 points : 
+1
+≤
+N
+≤
+2000
+,
+∑
+N
+≤
+5000
+1≤N≤2000,∑N≤5000
+70 points : 
+1
+≤
+N
+≤
+2
+⋅
+1
+0
+5
+,
+∑
+N
+≤
+5
+⋅
+1
+0
+5
+1≤N≤2⋅10 
+5
+ ,∑N≤5⋅10 
+5
+ 
+Sample 1:
+Input
+Output
+3
+2
+1 2
+3
+7 4 9
+5
+45 76 91 21 9
+2
+7
+21
+Explanation:
+Test Case 
+1
+1: There are only 
+2
+2 days, so the night king will attack the day with a higher temperature.
+Test Case 
+3
+3: Out of the 
+5
+5 possible days, Night King will attack the day with the 2nd lowest temperature, therefore 
+21
+21 will be the answer.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while(t-->0){
+		    int n=sc.nextInt();
+		    int[]a=new int[n];
+		    for(int i=0;i<n;i++)
+		    a[i]=sc.nextInt();
+		    Arrays.sort(a);
+		    System.out.println(a[1]);
+		}
+	}
+}
