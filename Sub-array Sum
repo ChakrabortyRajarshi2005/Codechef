@@ -1,0 +1,325 @@
+Sub-array Sum
+Given an array 
+A
+A of integers of length 
+N
+N. Find the sum of difference between maximum and minimum elements of all sub-arrays. Formally, find the value of the following expression : 
+∑
+i
+=
+1
+N
+∑
+j
+=
+i
+N
+m
+a
+x
+(
+A
+i
+,
+A
+i
++
+1
+.
+.
+.
+A
+j
+)
+−
+m
+i
+n
+(
+A
+i
+,
+A
+i
++
+1
+.
+.
+.
+A
+j
+)
+i=1
+∑
+N
+​
+  
+j=i
+∑
+N
+​
+ max(A 
+i
+​
+ ,A 
+i+1
+​
+ ...A 
+j
+​
+ )−min(A 
+i
+​
+ ,A 
+i+1
+​
+ ...A 
+j
+​
+ )
+
+Input Format
+First line will contain 
+T
+T, number of testcases. Then the testcases follow.
+First line of each testcase contains a single integer 
+N
+N.
+Second line of each testcase contains of 
+N
+N integers : 
+A
+1
+,
+A
+2
+.
+.
+.
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ...A 
+N
+​
+ .
+Output Format
+For each testcase, output a single integer equal to the value of given expression.
+
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+1
+≤
+A
+i
+≤
+1
+0
+5
+1≤A 
+i
+​
+ ≤10 
+5
+ 
+It is guaranteed that the sum of values of 
+N
+N over all the test cases doesn't exceed 
+2
+∗
+1
+0
+6
+2∗10 
+6
+ .
+
+Subtasks
+30 points : 
+1
+≤
+N
+≤
+500
+1≤N≤500
+70 points : original constraints
+Sample 1:
+Input
+Output
+2
+3
+1 4 9
+3
+5 5 5
+16
+0
+Explanation:
+Test-case 1: Consider all the sub-arrays of given array
+
+[1]
+[1, 4]
+[1, 4, 9]
+[4]
+[4, 9]
+[9]
+The desired value = 
+(
+1
+−
+1
+)
++
+(
+4
+−
+1
+)
++
+(
+9
+−
+1
+)
++
+(
+4
+−
+4
+)
++
+(
+9
+−
+4
+)
++
+(
+9
+−
+9
+)
+=
+16
+(1−1)+(4−1)+(9−1)+(4−4)+(9−4)+(9−9)=16
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.stream.*;
+class Codechef
+{
+
+    /*
+     * Idea: Store the count of each element in the no. of subarrays it is a maximum
+     * 26 23 17 24 9 1
+     * 6  2  1  5  2 1
+     * This way we have O(n) complexity and can find the subarray sum on same TC
+     */
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.valueOf(br.readLine());
+		while(T-- >0){
+		    int N = Integer.valueOf(br.readLine());
+		    long arr[] = Stream.of(br.readLine().split("\\s+"))
+                            .mapToLong(Long::valueOf)
+                            .toArray();
+            long sumMax = findMaxElemCounts(arr, N);
+            //System.out.println(sumMax);
+            long brr[] = Arrays.stream(arr).map(x -> -x).toArray();
+            //for(long m:brr)System.out.print(m+" ");
+            long sumMin = findMaxElemCounts(brr, N);
+            System.out.println(sumMax+sumMin);
+             
+        }
+    }
+    static long findMaxElemCounts( long[] arr, int N){
+        int []left = new int[N]; //count of consecutive left elements small
+        int []right= new int[N]; //count of consecutive right small
+        Stack<Long> St = new Stack<Long>();
+        Stack<Integer> Si = new Stack<Integer>();
+        
+        // for setting indices of range covered
+        St.push(arr[0]);
+        Si.push(0);
+        long el=0L;
+        int ind=-1;
+        left[0] = 0;
+
+        for(int i=1;i<N;i++){
+            if(St.peek() >= arr[i]){
+                St.push(arr[i]);
+                Si.push(i);
+             //   continue;
+            }else {
+                while(!St.isEmpty() && St.peek()<arr[i]){
+                    
+                    el = St.pop();
+                    ind = Si.pop();
+                    if(!St.isEmpty()) left[ind] = ind - Si.peek()-1;
+                    else left[ind] = ind;
+
+                    right[ind] = i-ind-1;
+                }
+                St.push(arr[i]);
+                Si.push(i);   
+            }      
+              /*   
+              System.out.println("Si => "+Si);
+              System.out.println("St => "+St);
+              for(int m:left)System.out.print(m+" ");
+              for(int m:right)System.out.print(m+" ");
+              System.out.println("\n");
+              */  
+        }  
+
+        //for elems left in stack
+        while(!St.isEmpty()){
+            el = St.pop();
+            ind = Si.pop();
+            if(!St.isEmpty()) left[ind] = ind - Si.peek()-1;
+            else left[ind] = ind;
+            right[ind] = N-1-ind;
+        }
+        /*
+        System.out.println("Si => "+Si);
+        System.out.println("St => "+St);
+        for(int m:left)System.out.print(m+" ");
+        System.out.println();
+        for(int m:right)System.out.print(m+" ");
+        System.out.println("\n"); 
+        */
+        //long sum[]=new long[N];
+        long res = 0L;
+        long cnt = 0;
+        for(int i=0;i<N;i++){
+            cnt = (1+left[i]) * (1+right[i]);
+            res+=cnt*arr[i];
+            //res +=sum[i];
+        }
+        
+        return res;
+            
+	}
+	
+}
