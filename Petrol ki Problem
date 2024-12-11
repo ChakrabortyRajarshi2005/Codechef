@@ -1,0 +1,204 @@
+Petrol ki Problem
+Alice is an engineer. They live in a circular world where the whole world is joined with a single circular road. She and her friends have a car with infinite fuel storing capacity.
+They have a plan to go all around the world once and return to the same place again from where they started. But they initially have an empty tank. There are a total of 
+N
+N Petrol pumps along the way. Considering 0 based indexing,The cost of going from ith Petrol pump to 
+i
++
+1
+t
+h
+i+1 
+th
+  (Note that 
+n
+−
+1
+t
+h
+n−1 
+th
+  petrol pump takes you to 
+0
+t
+h
+0 
+th
+  petrol pump) Petrol Pump is 
+c
+o
+s
+t
+[
+i
+]
+cost[i] and the amount of Petrol available at 
+i
+t
+h
+i 
+th
+  petrol pump is 
+p
+e
+t
+r
+o
+l
+[
+i
+]
+petrol[i] where both the arrays cost and petrol will be given and 
+i
+<
+n
+i<n. But they aren’t able to figure out where to start from to make such a trip, or if such a trip is even possible with their world. Help them figure this out.
+
+Input Format
+The first line will contain 
+N
+N The second line will contain 
+N
+N integers separated by space where 
+i
+t
+h
+i 
+th
+  integer is 
+p
+e
+t
+r
+o
+l
+[
+i
+]
+petrol[i] The third line will contain 
+N
+N integers separated by space where 
+i
+t
+h
+i 
+th
+  integer is 
+c
+o
+s
+t
+[
+i
+]
+cost[i]
+
+Output Format
+Output the number of the petrol pump (0-indexed) they should start from so that they can complete the trip and if they cannot complete the trip , output -1.
+
+Constraints
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+0
+≤
+c
+o
+s
+t
+[
+i
+]
+,
+p
+e
+t
+r
+o
+l
+[
+i
+]
+≤
+1
+0
+4
+0≤cost[i],petrol[i]≤10 
+4
+ 
+Subtasks
+30 points : 
+1
+≤
+N
+≤
+1000
+1≤N≤1000
+70 points : 
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+Sample 1:
+Input
+Output
+4
+5 8 2 8
+6 5 6 6
+3
+Explanation:
+Its only if they start from the last petrol pump that they start ,they can reach the same petrol pump again.
+
+Sample 2:
+Input
+Output
+3
+2 3 4
+3 4 3
+-1
+Explanation:
+No matter where they start, they cannot complete the trip.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		 Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] p=new int[n],c=new int[n];
+         int psum=0,csum=0;
+        for(int i =0;i<n;i++) { p[i] = sc.nextInt(); psum=psum+p[i];}
+        for(int i =0;i<n;i++) { c[i] = sc.nextInt(); csum = csum+c[i];}
+        //int flage =0;
+        if(psum<csum)
+        {
+            System.out.println(-1);
+            return;
+            
+        }
+        int start=0,sum=0;
+        for(int i=0;i<n;i++){
+            sum+=p[i]-c[i];
+            if(sum<0){start=i+1;sum=0;}
+        }
+        System.out.println(start);
+
+	}
+}
