@@ -1,0 +1,191 @@
+Remove Duplicates
+Chef gave you the 
+h
+e
+a
+d
+head of a sorted linked list which may contain duplicate values. You've to remove all the duplicate values and return the sorted linked list such that it does not contain any duplicates.
+
+Input Format
+First-line will contain 
+T
+T, the number of test cases. Then the test cases follow.
+Each test case contains two lines of input.
+The first line of every test case contains an integer 
+N
+N - the length of array.
+The second line of every test case contains 
+N
+N integers - 
+A
+1
+,
+A
+2
+,
+.
+.
+,
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,..,A 
+N
+​
+  denoting the integers in the array.
+It is guaranteed that the array is sorted
+You don't need to read or print anything. Just complete the function removeDuplicates() which takes the head of the linked list as input.
+Output Format
+Return the head of the sorted linked list without duplicates.
+
+Constraints
+1
+≤
+T
+≤
+1000
+1≤T≤1000
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+1
+≤
+A
+i
+≤
+1
+0
+9
+1≤A 
+i
+​
+ ≤10 
+9
+ 
+∑
+N
+≤
+5
+⋅
+1
+0
+5
+∑N≤5⋅10 
+5
+ 
+Subtasks
+30 points :
+1
+≤
+N
+≤
+1
+0
+3
+1≤N≤10 
+3
+ ,
+∑
+N
+≤
+5
+⋅
+1
+0
+3
+∑N≤5⋅10 
+3
+ 
+70 points : Original Constraints
+Sample 1:
+Input
+Output
+4
+4
+6 15 22 22
+5
+13 17 17 17 20
+4
+5 6 6 6
+2
+9 9
+6 15 22 
+13 17 20 
+5 6 
+9 
+Explanation:
+Test Case 1: It is easy to see that the linked list without duplicates is 
+[
+6
+,
+15
+,
+22
+]
+[6,15,22]
+
+Test Case 4: The is only a single value in the entire linked list
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Node {
+    int val;
+    Node next;
+    Node(int v){
+        this.val = v;
+    }
+}
+class Codechef
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        // your code goes here
+       Scanner sc = new Scanner(System.in);
+       int t = sc.nextInt();
+       for(int k=0;k<t;k++){
+       int n = sc.nextInt();
+       int[] ar = new int[n];
+       for(int i=0;i<n;i++){
+           ar[i] = sc.nextInt();
+       }
+       Node head = new Node(ar[0]);
+       Node curr = head;
+       for(int i=1;i<n;i++){
+           curr.next = new Node(ar[i]);
+           curr =curr.next;
+       }
+       Node prev = head;
+      curr= head.next;
+       int num =head.val;
+       while(curr!=null){
+           if(curr.val == num){
+               prev.next=curr.next;
+           }
+           else{
+               prev=curr;
+               num = prev.val;
+           }
+           curr=curr.next;
+       }
+       curr= head;
+       while(curr!=null){
+           System.out.println(curr.val);
+           curr = curr.next;
+       }
+       }
+    }
+}
