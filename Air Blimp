@@ -1,0 +1,440 @@
+Air Blimp
+There are 
+N
+N cities in a row. The 
+i
+i-th city from the left has a sadness of 
+A
+i
+A 
+i
+​
+ .
+
+In an attempt to reduce the sadness of the cities, you can send blimps from the left of city 
+1
+1 that move rightwards (i.e, a blimp crosses cities 
+1
+,
+2
+,
+…
+1,2,… in order)
+
+You are given two integers 
+X
+X and 
+Y
+Y. For each blimp sent, you can make one of the following choices:
+
+Let the blimp fly over every city, in which case the sadness of every city will decrease by 
+Y
+Y, or,
+Choose a city 
+i
+i 
+(
+1
+≤
+i
+≤
+N
+)
+(1≤i≤N), and shower confetti over city 
+i
+i. In this case, the sadness of cities 
+1
+,
+2
+,
+…
+,
+i
+−
+1
+1,2,…,i−1 will decrease by 
+Y
+Y, the sadness of city 
+i
+i will decrease by 
+X
+X, and cities 
+i
++
+1
+,
+…
+,
+N
+i+1,…,N see no change in sadness.
+Find the minimum number of blimps needed such that, by making the above choice optimally for each blimp, you can ensure that no city is sad (i.e, in the end every city has sadness 
+≤
+0
+≤0).
+
+Input Format
+The first line of input contains a single integer 
+T
+T — the number of test cases. Then the test cases follow.
+The first line of each test case contains three space-separated integers 
+N
+,
+X
+,
+Y
+N,X,Y — the size of the array, and the parameters mentioned in the statement.
+The second line of each test case contains 
+N
+N space-separated integers 
+A
+1
+,
+A
+2
+,
+…
+,
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,…,A 
+N
+​
+ , denoting the sadness of the 
+N
+N cities.
+Output Format
+For each test case, output on a new line the minimum number of blimps needed such that no city is sad.
+
+Constraints
+1
+≤
+T
+≤
+1
+0
+4
+1≤T≤10 
+4
+ 
+1
+≤
+N
+≤
+3
+⋅
+1
+0
+5
+1≤N≤3⋅10 
+5
+ 
+1
+≤
+X
+,
+Y
+≤
+1
+0
+9
+1≤X,Y≤10 
+9
+ 
+0
+≤
+A
+i
+≤
+1
+0
+9
+0≤A 
+i
+​
+ ≤10 
+9
+ 
+The sum of 
+N
+N over all test cases does not exceed 
+3
+⋅
+1
+0
+5
+3⋅10 
+5
+ 
+Sample 1:
+Input
+Output
+3
+4 4 4
+1 5 4 4
+5 4 3
+1 4 3 3 5
+4 3 1
+3 1 3 9
+2
+2
+3
+Explanation:
+Test case 
+1
+1: One way of using two blimps is as follows:
+
+Initially, 
+A
+=
+[
+1
+,
+5
+,
+4
+,
+4
+]
+A=[1,5,4,4]
+Shower confetti on city 
+2
+2. Now, 
+A
+=
+[
+−
+3
+,
+1
+,
+4
+,
+4
+]
+A=[−3,1,4,4].
+Shower confetti on city 
+4
+4. Now, 
+A
+=
+[
+−
+7
+,
+−
+3
+,
+0
+,
+0
+]
+A=[−7,−3,0,0] and we are done.
+Test case 
+2
+2: One way of using two blimps is as follows:
+
+Initially, 
+A
+=
+[
+1
+,
+4
+,
+3
+,
+3
+,
+5
+]
+A=[1,4,3,3,5]
+Let a blimp fly over every city. Now, 
+A
+=
+[
+−
+2
+,
+1
+,
+0
+,
+0
+,
+2
+]
+A=[−2,1,0,0,2].
+Shower confetti on city 
+5
+5. Now, 
+A
+=
+[
+−
+5
+,
+−
+2
+,
+−
+3
+,
+−
+3
+,
+−
+2
+]
+A=[−5,−2,−3,−3,−2], and we are done.
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.StringTokenizer;
+import java.util.*;
+/*` `
+
+ */
+ 
+ class Main{
+public static long gcd(long a, long b) {
+      return b == 0 ? a : gcd(b, a % b); }
+    
+ static final int mod=1_000_000_007;
+ 
+ public static void main(String[] args) {
+		FastScanner fs=new FastScanner();
+		PrintWriter out=new PrintWriter(System.out);
+		Scanner sc=new Scanner(System.in);
+        int T=fs.nextInt();
+//int T=1;
+		for (int tt=1; tt<=T; tt++) {
+		     int n=fs.nextInt();
+		      long x=fs.nextLong();
+		      long y=fs.nextLong();
+		      long[] a=new long[n];
+		      for(int i=0;i<n;i++){
+		          a[i]=fs.nextLong();
+		      } 
+		      if(y>=x){
+		   
+		          long ans=-1;
+		          for(long i:a){
+		              ans=Math.max(ans,i);
+		          }
+		           out.println((ans+y-1)/y);
+		      }
+		      else{
+		          long finalans=0;
+		         for(int i=n-1;i>=0;i--){
+		             a[i]-=finalans*y;
+		             if(a[i]>0){
+		                 finalans+=(a[i]+x-1)/x;
+		             }
+		         }
+		         out.println(finalans);
+		      }
+		}
+		out.close();
+	}
+
+	static int[] match(int[] a, int[] b) {
+		int[] res=new int[a.length];
+		for (int i=0; i<a.length; i++) res[i]=o(a[i], b[i]);
+		return res;
+	}
+	static long toL(int[] a) {
+		long ans=0;
+		for (int i:a) ans=ans*3+i;
+		return ans;
+	}
+	static int o(int a, int b) {
+		if (a==b) return a;
+		return a^b^3;
+	}
+
+	static final Random random=new Random();
+	
+	
+	static void ruffleSort(int[] a) {
+		int n=a.length;//shuffle, then sort 
+		for (int i=0; i<n; i++) {
+			int oi=random.nextInt(n), temp=a[oi];
+			a[oi]=a[i]; a[i]=temp;
+		}
+		Arrays.sort(a);
+	}
+	static long add(long a, long b) {
+		return (a+b)%mod;
+	}
+	static long sub(long a, long b) {
+		return ((a-b)%mod+mod)%mod;
+	}
+	static long mul(long a, long b) {
+		return (a*b)%mod;
+	}
+	static long exp(long base, long exp) {
+		if (exp==0) return 1;
+		long half=exp(base, exp/2);
+		if (exp%2==0) return mul(half, half);
+		return mul(half, mul(half, base));
+	}
+	static long[] factorials=new long[2_000_001];
+	static long[] invFactorials=new long[2_000_001];
+	static void precompFacts() {
+		factorials[0]=invFactorials[0]=1;
+		for (int i=1; i<factorials.length; i++) factorials[i]=mul(factorials[i-1], i);
+		invFactorials[factorials.length-1]=exp(factorials[factorials.length-1], mod-2);
+		for (int i=invFactorials.length-2; i>=0; i--)
+			invFactorials[i]=mul(invFactorials[i+1], i+1);
+	}
+	
+	static long nCk(int n, int k) {
+		return mul(factorials[n], mul(invFactorials[k], invFactorials[n-k]));
+	}
+	
+	static void sort(int[] a) {
+		ArrayList<Integer> l=new ArrayList<>();
+		for (int i:a) l.add(i);
+		Collections.sort(l);
+		for (int i=0; i<a.length; i++) a[i]=l.get(i);
+	}
+
+	static class FastScanner {
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st=new StringTokenizer("");
+		String next() {
+			while (!st.hasMoreTokens())
+				try {
+					st=new StringTokenizer(br.readLine());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			return st.nextToken();
+		}
+		
+		int nextInt() {
+			return Integer.parseInt(next());
+		}
+		int[] readArray(int n) {
+			int[] a=new int[n];
+			for (int i=0; i<n; i++) a[i]=nextInt();
+			return a;
+		}
+		long nextLong() {
+			return Long.parseLong(next());
+		}
+	} 
+
+}
