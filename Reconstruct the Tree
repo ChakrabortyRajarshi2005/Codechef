@@ -1,0 +1,271 @@
+Reconstruct the Tree
+You are given a level order traversal of a complete binary tree which has 
+N
+N nodes numbered from 
+1
+1 to 
+N
+N. The label of the 
+i
+i-th node in the traversal is 
+A
+i
+A 
+i
+​
+ . You need to reconstruct that tree.
+
+A binary tree is a tree in which each node has at most two children.
+
+A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible.
+
+A level order traversal of a complete binary tree is a sequence in which each node's label appears exactly once and where the nodes are arranged in increasing order of their distance to the root of the tree. Nodes that have the same distance to the root are arranged in order from left to right.
+
+Input Format
+The first line of the input contains a single integer 
+T
+T - the number of test cases. The description of 
+T
+T test cases follows.
+
+The first line of each test case contains a single integer 
+N
+N.
+
+The second line contains 
+N
+N space-separated integers 
+A
+1
+,
+A
+2
+,
+…
+,
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,…,A 
+N
+​
+  - the level order traversal of the tree.
+
+Note:
+
+For Java language, you need to:
+Complete the function in the submit solution tab:
+
+Node reconstruct(Vector(Integer) traversal){...}
+ 
+ 
+
+For C++ language, you need to:
+Complete the function in the submit solution tab:
+
+Node* reconstruct(vector(int) traversal){...}
+ 
+ 
+
+For Python language, you need to:
+Complete the function in the submit solution tab:
+
+def reconstruct(traversal: List):
+Output Format
+For each test case, the function you complete should return the root of the complete binary tree. After the function is called, the validity of the reconstructed tree is checked in the hidden part of the submitted code rather than in the checker. Therefore, the output of your solution will always either be 
+1
+1 if the reconstructed tree returned by your function is valid or 
+0
+0 if the reconstructed tree returned by your function is invalid. The checker simply verifies that the output of the solution is 
+1
+1 on each test case.
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+1
+≤
+N
+≤
+1
+0
+5
+1≤N≤10 
+5
+ 
+1
+≤
+A
+i
+≤
+N
+1≤A 
+i
+​
+ ≤N
+each node's label appears exactly once in the sequence 
+A
+A
+The sum of 
+N
+N over all test cases does not exceed 
+1
+0
+5
+10 
+5
+ 
+Sample 1:
+Input
+Output
+1
+5
+1 2 3 4 5
+1
+Explanation:
+Example case 1: The level order traversal of the complete binary tree whose root is node 
+1
+1 and which has edges 
+(
+1
+,
+2
+)
+,
+(
+1
+,
+3
+)
+,
+(
+2
+,
+4
+)
+(1,2),(1,3),(2,4) and 
+(
+2
+,
+5
+)
+(2,5) is exactly 
+[
+1
+,
+2
+,
+3
+,
+4
+,
+5
+]
+[1,2,3,4,5]. Note that the output field only contains a single integer 
+1
+1 which indicates that the reconstructed tree is valid. A single integer 
+0
+0 in the output field would indicate that the reconstructed tree is invalid which would result in the 'Wrong answer' verdict.
+
+Sample 2:
+Input
+Output
+1
+7
+2 1 3 5 7 6 4 
+1
+Explanation:
+Example case 1: The level order traversal the complete binary tree whose root is node 
+2
+2 and which has edges 
+(
+2
+,
+1
+)
+,
+(
+2
+,
+3
+)
+,
+(
+1
+,
+5
+)
+,
+(
+1
+,
+7
+)
+,
+(
+3
+,
+6
+)
+(2,1),(2,3),(1,5),(1,7),(3,6) and 
+(
+3
+,
+4
+)
+(3,4) is exactly 
+[
+2
+,
+1
+,
+3
+,
+5
+,
+7
+,
+6
+,
+4
+]
+[2,1,3,5,7,6,4]. Note that the output field only contains a single integer 
+1
+1 which indicates that the reconstructed tree is valid. A single integer 
+0
+0 in the output field would indicate that the reconstructed tree is invalid which would result in the 'Wrong answer' verdict.
+public class Main {
+    // Method to reconstruct the binary tree from traversal list
+    public Node reconstruct(List<Integer> traversal) {
+        if (traversal.isEmpty()) {
+            return null;
+        }
+        Node root = new Node(traversal.get(0));
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        int i = 1;
+        while (!q.isEmpty() && i < traversal.size()) {
+            Node current = q.poll();
+            int leftValue = traversal.get(i++);
+            if (leftValue != -1) {
+                current.left = new Node(leftValue);
+                q.add(current.left);
+            }
+            if (i < traversal.size()) {
+                int rightValue = traversal.get(i++);
+                if (rightValue != -1) {
+                    current.right = new Node(rightValue);
+                    q.add(current.right);
+                }
+            }
+        }
+        return root;
+    }
