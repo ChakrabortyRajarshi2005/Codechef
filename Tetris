@@ -1,0 +1,210 @@
+Tetris
+Chef and Chefina are playing a game of Tetris together. In a single move, a player can either clear 
+1
+1, 
+2
+2, 
+3
+3, or 
+4
+4 lines of blocks. Clearing 
+4
+4 lines in a single move is called getting a "Tetris".
+
+Chef and Chefina take turns playing, with Chef starting first.
+Whenever the current player clears only one line, the turn shifts to the other player; otherwise it remains with the current player.
+They will stop playing as soon as at least 
+L
+L lines are cleared in total. That is, the game stops when the sum of the number of lines cleared by both the players is at least 
+L
+L.
+
+Chef wants to end the game in style, and so would like to be the one who finishes the game and do so by getting a "Tetris", i.e, by clearing 
+4
+4 lines.
+How many sequences of moves are there in which this happens?
+
+The number of sequences may be large, so print it modulo 
+1
+0
+9
++
+7
+10 
+9
+ +7.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each of the next 
+T
+T lines contains one integer 
+L
+L — the number of lines to be cleared.
+Output Format
+For each test case, output on a new line the total number of ways in which Chef can finish the game by getting a "Tetris", modulo 
+1
+0
+9
++
+7
+10 
+9
+ +7.
+Constraints
+1
+≤
+T
+≤
+1
+0
+5
+1≤T≤10 
+5
+ 
+1
+≤
+L
+≤
+1
+0
+5
+1≤L≤10 
+5
+ 
+Sample 1:
+Input
+Output
+4
+3
+2
+4
+100000
+3
+1
+4
+246691813
+Explanation:
+Test case 
+1
+1: For 
+L
+=
+3
+L=3, there are 
+3
+3 possible ways such that Chef can finish the game with a "Tetris":
+
+Clear 
+4
+4 lines immediately.
+Clear 
+2
+2 lines first, then 
+4
+4.
+Clear one line, transferring the turn to Chefina. Chefina then clears one line, transferring the turn back to Chef, who then gets a "Tetris".
+Test case 
+2
+2: For 
+L
+=
+2
+L=2, the only possibility is that Chef gets a "Tetris" on the very first move.
+
+Test case 
+3
+3: For 
+L
+=
+4
+L=4, there are 
+4
+4 valid sequences of moves: 
+(
+2
+,
+4
+)
+,
+(
+1
+,
+1
+,
+4
+)
+,
+(
+3
+,
+4
+)
+,
+(
+4
+)
+(2,4),(1,1,4),(3,4),(4).
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    static long mod = 1000000007;
+    static long dp[][];
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		Scanner sc = new Scanner(System.in);
+		int len = 100000;
+		dp = new long[len+1][2];
+		    dp[len][0] = 1l;
+		    for(int i=len-1;i>=0;i--)
+		    {
+		        if(i+4>=len)
+		        {
+		            dp[i][0]+=dp[len][0];
+		            dp[i][0]%=mod;
+		            dp[i][1]+=dp[len][1];
+		            dp[i][1]%=mod;
+		        }
+		        else {
+		            dp[i][0]+=dp[i+4][0];
+		            dp[i][0]%=mod;
+		            dp[i][1]+=dp[i+4][1];
+		            dp[i][1]%=mod;
+		        }
+		        if(i+3<len)
+		        {
+		            dp[i][0]+=dp[i+3][0];
+		            dp[i][0]%=mod;
+		            dp[i][1]+=dp[i+3][1];
+		            dp[i][1]%=mod;
+		        }
+		        if(i+2<len)
+		        {
+		            dp[i][0]+=dp[i+2][0];
+		            dp[i][0]%=mod;
+		            dp[i][1]+=dp[i+2][1];
+		            dp[i][1]%=mod;
+		        }
+		        if(i+1<len)
+		        {
+		            dp[i][0]+=dp[i+1][1];
+		            dp[i][0]%=mod;
+		            dp[i][1]+=dp[i+1][0];
+		            dp[i][1]%=mod;
+		        }
+		    }
+		int t = sc.nextInt();
+		while(t-->0)
+		{
+		    int l = sc.nextInt();
+		   System.out.println(dp[len-l][0]); 
+		}
+        
+	}
+}
