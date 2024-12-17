@@ -1,0 +1,202 @@
+Indivisible Permutation
+You are given an integer 
+N
+N. Construct an array 
+P
+P of size 
+N
+N such that:
+
+P
+P is a permutation of the first 
+N
+N natural numbers, i.e, each integer 
+1
+,
+2
+,
+3
+,
+…
+N
+1,2,3,…N occurs exactly once in 
+P
+P. For example, 
+[
+1
+,
+3
+,
+2
+]
+[1,3,2] is a permutation of size 
+3
+3, but 
+[
+1
+,
+3
+,
+4
+]
+[1,3,4] and 
+[
+2
+,
+1
+,
+2
+]
+[2,1,2] are not.
+P
+P is indivisible. 
+P
+P is said to be indivisible if 
+i
+i does not divide 
+P
+i
+P 
+i
+​
+  for every index 
+2
+≤
+i
+≤
+N
+2≤i≤N.
+It can be proven that under the given constraints, there always exists an indivisible permutation. If there are multiple, you may print any of them.
+
+Input Format
+The first line of input contains a single integer 
+T
+T, denoting the number of test cases. The description of 
+T
+T test cases follows.
+The first and only line of each test case contains a single integer 
+N
+N, denoting the size of the indivisible permutation you must construct.
+Output Format
+For every test case, print a single line containing 
+N
+N space-separated integers. These integers must form an indivisible permutation.
+Constraints
+1
+≤
+T
+≤
+600
+1≤T≤600
+2
+≤
+N
+≤
+1
+0
+5
+2≤N≤10 
+5
+ 
+Sum of 
+N
+N over all test cases does not exceed 
+2
+⋅
+1
+0
+5
+2⋅10 
+5
+ 
+Sample 1:
+Input
+Output
+4
+2
+3
+4
+5
+2 1 
+1 3 2 
+1 3 4 2 
+4 5 2 3 1 
+Explanation:
+For the last test case:
+P
+2
+=
+5
+P 
+2
+​
+ =5 is not divisible by 
+2
+2
+P
+3
+=
+2
+P 
+3
+​
+ =2 is not divisible by 
+3
+3
+P
+4
+=
+3
+P 
+4
+​
+ =3 is not divisible by 
+4
+4
+P
+5
+=
+1
+P 
+5
+​
+ =1 is not divisible by 
+5
+5
+Since 
+i
+i does not divide 
+P
+i
+P 
+i
+​
+  for every index 
+2
+≤
+i
+≤
+N
+2≤i≤N, the permutation is indivisible.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	  Scanner input=new Scanner(System.in);
+	  int t=input.nextInt();
+	  while(t-->0)
+	  {
+	    int n=input.nextInt();
+	    for(int i=2;i<=n;i++)
+	     System.out.print(i+" ");
+	    System.out.println("1");
+	 
+	  }
+	  
+	
+	  
+	}
+}
