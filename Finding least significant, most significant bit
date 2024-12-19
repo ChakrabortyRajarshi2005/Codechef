@@ -1,0 +1,51 @@
+Finding least significant, most significant bit
+Finding Least significant bit
+The least significant bit (LSB) of a binary number is the rightmost bit. You can calculate it using the bitwise AND operation with 1.
+
+   lsb = (num & 1)
+Finding Most significant bit
+To find the most significant bit (MSB) of an integer, you can iterate through its binary representation and identify the leftmost non-zero bit. The pseudocode to find the position of the most significant bit (MSB) in a positive integer:
+
+function find_msb_position(number):
+    if number <= 0:
+        raise ValueError("Input must be a positive integer")
+
+    msb_position = 0
+
+    while number > 0:
+        number = number >> 1  // Right shift by 1 to move to the next bit
+        msb_position = msb_position + 1
+
+    return msb_position - 1  // Subtract 1 to get the 0-based position
+Task
+Write a program to input an integer N.
+Print the position of the most significant bit, and print the least significant bit.
+Sample 1:
+Input
+Output
+15
+3 1
+Sample 2:
+Input
+Output
+24
+4 0
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int lsb = n & 1;
+        int msb_pos = 0;
+        while (n != 0) {
+            n /= 2;
+            msb_pos++;
+        }
+        msb_pos--;
+        System.out.println(msb_pos + " " + lsb);
+        scanner.close();
+    }
+}
