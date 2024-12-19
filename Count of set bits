@@ -1,0 +1,70 @@
+Count of set bits
+Checking set bit
+To check if a specific bit is set (equals 1) or not in a binary representation, you can use the bitwise AND operator (&). Here's how you can do it in pseudocode:
+
+function is_bit_set(number, position):
+    # Shift 1 to the left by the specified position
+    mask = 1 << position
+
+    # Use bitwise AND to check if the bit is set
+    return (number & mask) != 0
+In this pseudocode:
+
+1 << position creates a mask with a 1 at the specified position by left-shifting the binary digit 1 to the left by the given position.
+(number & mask) != 0 checks if the bit at the specified position is set by performing a bitwise AND operation. If the result is not zero, it means the bit is set.
+Task
+Write a program that takes an input integer N and prints the count of the set bits present in the number.
+
+Input Format
+The first line of input will contain a single integer 
+N
+N, denoting the number.
+Output Format
+Output on a single line, the number of set bits in 
+N
+N.
+
+Constraints
+1
+≤
+N
+≤
+1000000000
+1≤N≤1000000000
+Sample 1:
+Input
+Output
+256
+1
+Explanation:
+Binary representation of 256 is: 100000000 Number of set bits = 1
+
+Sample 2:
+Input
+Output
+15
+4
+Explanation:
+Binary representation of 15 is: 1111 Number of set bits = 4
+import java.util.Scanner;
+
+class Codechef {
+
+    public static int countSetBits(int number) {
+        int count = 0;
+
+        while (number > 0) {
+            count += (number & 1);
+            number >>= 1;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+
+        System.out.println(countSetBits(N));
+    }
+}
