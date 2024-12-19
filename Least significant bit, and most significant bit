@@ -1,0 +1,52 @@
+Least significant bit, and most significant bit
+Least Significant Bit
+The least significant bit (LSB) is the rightmost bit in a binary representation of a number. In binary, each digit or bit represents a power of 2. The least significant bit represents the smallest power of 2 in the binary number, typically 20 or 1.
+
+For example, in the 8-bit binary number 11010101, the least significant bit is the rightmost bit, which is 1 in this case.
+
+Changing the least significant bit from 0 to 1 or from 1 to 0 results in a change of the least amount in the value of the number. This property is often used in various applications, such as error detection, cryptography, and certain data encoding techniques.
+
+Most Significant Bit
+The most significant bit (MSB) is the leftmost bit in a binary representation of a number. In binary notation, each bit represents a power of 2, with the leftmost bit typically representing the largest power of 2 in the number. The term "most significant" indicates that this bit contributes the most to the overall value of the number.
+
+For example, in the 8-bit binary number 11010101, the most significant bit is the leftmost bit, which is 1 in this case.
+
+Task
+Input an integer N and flip the most significant and least significant bit
+Print the number.
+Sample 1:
+Input
+Output
+6
+3
+Sample 2:
+Input
+Output
+7
+2
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+    public static void main(String[] args) {
+        // your code goes here
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        // flipping the least significant bit
+        n = n ^ 1;
+        // finding the position of the most significant bit
+        int pos = 0;
+        int n1 = n;
+        while (n1 != 0) {
+            n1 /= 2;
+            pos++;
+        }
+        pos--;
+        // flipping the most significant bit
+        n = n ^ (1 << pos);
+        System.out.println(n);
+        
+        sc.close();
+    }
+}
