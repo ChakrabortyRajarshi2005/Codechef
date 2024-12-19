@@ -1,0 +1,50 @@
+How to set, unset, flip a bit
+Set Bit
+To set a specific bit in a binary number, you can use the bitwise OR (|) operator. Here's how you can set a bit at a particular position:
+
+   num = num | (1 << position)
+In this example, 1 << position creates a number with a 1 at the specified position (bitwise left shift). The bitwise OR (|) then combines this with the original number, setting the bit to 1 at the specified position.
+
+   Example:
+      1100 = 1000 | (1 << 2)  (Binary representation)
+      (12)   (8)     (4)
+Unset Bit
+To unset (clear) a specific bit in a binary number, you can use the bitwise AND (&) operator along with the bitwise NOT (~) operator. Here's how you can unset a bit at a particular position.
+
+    num = num & ~(1 << position)
+   Example:
+      1000 = 1100 & ~(1 << 2)  (Binary representation)
+      (8)    (12)     (4)
+Flit bit
+To flip (toggle) a specific bit in a binary number, you can use the bitwise XOR (^) operator. Here's how you can flip a bit at a particular position:
+
+    num = num ^ (1 << position)
+   Example:
+      1000 = 1100 ^ (1 << 2)  (Binary representation)
+      (8)    (12)     (4)
+Task
+Given a number N.
+Perform the following operations: Set the first bit, Unset the second bit, and flip the third bit from the right hand side.
+Print the number.
+Sample 1:
+Input
+Output
+2
+5
+Sample 2:
+Input
+Output
+6
+1
+import java.util.*;
+class Codechef {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        n = n | (1 << 0);
+        n = n & ~(1 << 1);
+        n = n ^ (1 << 2); 
+        System.out.println(n);
+        scanner.close();
+    }
+}
