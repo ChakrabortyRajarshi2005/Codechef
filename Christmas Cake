@@ -1,0 +1,81 @@
+Christmas Cake
+Chef plans to celebrate Christmas by baking a cake.
+
+Christmas falls on the 
+25
+25-th of December.
+Every day before Christmas, till the 
+24
+24-th of December, Chef will bake exactly one practice cake.
+
+Today is the 
+X
+X-th of December. How many practice cakes will Chef bake starting from today?
+
+Input Format
+The first and only line of input will contain a single integer 
+X
+X — today's date.
+Output Format
+For each test case, output a single integer: the number of practice cakes Chef will bake.
+
+Constraints
+1
+≤
+X
+≤
+24
+1≤X≤24
+Sample 1:
+Input
+Output
+18
+7
+Explanation:
+If today is the 
+18
+18-th of December, Chef will bake one cake on each of the dates 
+18
+,
+19
+,
+20
+,
+21
+,
+22
+,
+23
+,
+24
+18,19,20,21,22,23,24, which is 
+7
+7 in total.
+
+Sample 2:
+Input
+Output
+1
+24
+Explanation:
+Chef will bake one cake on every day from 
+1
+1 to 
+24
+24, which is 
+24
+24 cakes in total.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+	public static void main (String[] args) throws java.lang.Exception {
+        Scanner scanner = new Scanner(System.in);
+        int X = scanner.nextInt();
+        int numberOfCakes = 24 - X + 1;
+        System.out.println(numberOfCakes);
+        
+        scanner.close();
+    }
+}
