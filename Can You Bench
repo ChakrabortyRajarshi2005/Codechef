@@ -1,0 +1,98 @@
+Can You Bench
+Chef goes to the gym daily and follow a progressive bench press routine. In the 
+1
+s
+t
+1 
+st
+  set, Chef will lift 
+X
+X kilograms. For each subsequent set, you increase the weight by 
+10
+10 kilograms.
+
+Your task is to calculate the amount of weight Chef will bench in the 
+3
+r
+d
+3 
+rd
+  set.
+
+Input Format
+The input consists of a single integer 
+X
+X, the weight (in kilograms) Chef benches in the 
+1
+s
+t
+1 
+st
+  set.
+
+Output Format
+Output a single integer — the weight (in kilograms) Chef will bench in the 
+3
+r
+d
+3 
+rd
+  set.
+
+Constraints
+1
+≤
+X
+≤
+100
+1≤X≤100
+
+Sample 1:
+Input
+Output
+10
+30
+Explanation:
+In the 
+1
+s
+t
+1 
+st
+  set Chef benches 10 kg, in the next it becomes 20 kg and in the 
+3
+r
+d
+3 
+rd
+  it becomes 30 kg
+
+Sample 2:
+Input
+Output
+20
+40
+Explanation:
+In the 
+1
+s
+t
+1 
+st
+  set Chef benches 20 kg, in the next it becomes 30 kg and in the 
+3
+r
+d
+3 
+rd
+  it becomes 40 kg
+import java.util.Scanner;
+class BenchPress {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int X = scanner.nextInt();
+        int thirdSetWeight = X + 20;
+        System.out.println(thirdSetWeight);
+        scanner.close();
+    }
+}
