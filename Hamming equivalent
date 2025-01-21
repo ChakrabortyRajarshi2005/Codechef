@@ -1,0 +1,296 @@
+Hamming equivalent
+You are given a permutation 
+P
+P of length 
+N
+N. You are allowed to perform the following operation any number of times:
+
+Choose any two numbers 
+P
+i
+P 
+i
+​
+  and 
+P
+j
+P 
+j
+​
+  such that the number of set bits (
+1
+1s in their binary representation) is the same, and swap them.
+Determine if it is possible to sort the permutation in ascending order using this operation. If possible, print Yes; otherwise, print No.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of two lines of input.
+The first line of each test case contains a single integer 
+N
+N, denoting the length of the permutation 
+P
+P.
+The second line contains 
+N
+N space-separated integers 
+P
+1
+,
+P
+2
+,
+P
+3
+,
+…
+,
+P
+N
+P 
+1
+​
+ ,P 
+2
+​
+ ,P 
+3
+​
+ ,…,P 
+N
+​
+ , denoting the permutation 
+P
+P.
+Output Format
+For each test case, output on a new line the answer — YES it is possible to sort 
+P
+P in ascending order using this operation, and NO otherwise.
+
+Each character of the output may be printed in either uppercase or lowercase. For example, the strings YES, yeS, yes, and YeS will all be treated as identical.
+
+Constraints
+1
+≤
+T
+≤
+1
+0
+5
+1≤T≤10 
+5
+ 
+1
+≤
+N
+≤
+2
+⋅
+1
+0
+5
+1≤N≤2⋅10 
+5
+ 
+P
+P is a permutation of 
+{
+1
+,
+2
+,
+3
+,
+…
+N
+}
+{1,2,3,…N}
+The sum of 
+N
+N over all test cases does not exceed 
+5
+⋅
+1
+0
+5
+5⋅10 
+5
+ .
+Sample 1:
+Input
+Output
+4
+1
+1
+2
+2 1
+3
+3 1 2
+4
+4 1 3 2
+Yes
+Yes
+No
+Yes
+Explanation:
+Test case 
+2
+2: : We can swap 
+P
+1
+P 
+1
+​
+  and 
+P
+2
+P 
+2
+​
+  because both have exactly one 
+1
+1 in their binary representations.
+
+[
+2
+,
+1
+‾
+]
+→
+i
+=
+1
+,
+j
+=
+2
+[
+1
+,
+2
+]
+[ 
+2,1
+​
+ ] 
+i=1,j=2
+​
+ [1,2].
+
+Test case 
+3
+3: : There is no possible way to sort 
+P
+P.
+
+Test case 
+4
+4: :
+
+We can swap 
+P
+2
+P 
+2
+​
+  and 
+P
+4
+P 
+4
+​
+  because both have exactly one 
+1
+1 in their binary representations 
+[
+4
+,
+1
+‾
+,
+3
+,
+2
+‾
+]
+→
+i
+=
+2
+,
+j
+=
+4
+[
+4
+,
+2
+,
+3
+,
+1
+]
+[4, 
+1
+​
+ ,3, 
+2
+​
+ ] 
+i=2,j=4
+​
+ [4,2,3,1].
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+
+{
+     // Precompute set bits for all numbers up to the maximum possible value
+    public static int[] precomputeSetBits(int max) {
+        int[] setBits = new int[max + 1];
+        for (int i = 1; i <= max; i++) {
+            setBits[i] = setBits[i >> 1] + (i & 1);
+        }
+        return setBits;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim());
+        
+        // Read the maximum possible value for the array elements
+        int maxVal = 100001; // Adjust based on constraints
+        int[] setBits = precomputeSetBits(maxVal);
+
+        while (t-- > 0) {
+            int n = Integer.parseInt(br.readLine().trim());
+            String[] str = br.readLine().split(" ");
+            int[] arr = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                arr[i] = Integer.parseInt(str[i]);
+            }
+
+            boolean flag = false;
+
+            for (int i = 0; i < n; i++) {
+                int val = arr[i];
+                int swapPos = arr[val - 1];
+
+                // Compare the precomputed set bits
+                if (val != i + 1) {
+                    if (setBits[val] != setBits[swapPos]) {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+
+            System.out.println(flag ? "No" : "Yes");
+        }
+    }
+}
