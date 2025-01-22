@@ -1,0 +1,376 @@
+Monster Monster
+You have run into an army of 
+N
+N monsters, and you must defeat them all!
+
+Each monster has a certain amount of health points (HP) which you know beforehand — the 
+i
+i-th monster has 
+H
+i
+H 
+i
+​
+  HP.
+You can attack exactly one monster per day, and only if your attack stat 
+A
+A is greater than or equal to the monster's HP. In other words, you can attack a monster only if you can defeat it in a single hit.
+
+At the end of each day, the HP of each alive monster increases by a fixed value, 
+X
+X.
+
+Find the minimum possible value of the attack stat 
+A
+A you need to be able to kill all the monsters.
+Note that you're allowed to kill the monsters in any order you like.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of two lines of input.
+The first line of each test case contains two space-separated integers 
+N
+N and 
+X
+X — the number of monsters and the amount by which HP increases per day, respectively.
+The next line contains 
+N
+N space separated integers, 
+H
+1
+,
+H
+2
+,
+…
+,
+H
+N
+H 
+1
+​
+ ,H 
+2
+​
+ ,…,H 
+N
+​
+ , the initial HP stats of the 
+N
+N monsters.
+Output Format
+For each test case, output on a new line a single integer, the minimum attack stat 
+A
+A needed to be able to kill all monsters.
+
+Constraints
+1
+≤
+T
+≤
+2
+×
+1
+0
+5
+1≤T≤2×10 
+5
+ 
+1
+≤
+N
+≤
+2
+×
+1
+0
+5
+1≤N≤2×10 
+5
+ 
+1
+≤
+X
+≤
+1
+0
+9
+1≤X≤10 
+9
+ 
+1
+≤
+H
+i
+≤
+1
+0
+9
+1≤H 
+i
+​
+ ≤10 
+9
+ 
+The sum of 
+N
+N over all test cases won't exceed 
+2
+×
+1
+0
+5
+2×10 
+5
+ .
+Sample 1:
+Input
+Output
+2
+3 10
+3 1 2
+5 1
+10 3 2 1 2
+21
+10
+Explanation:
+Test case 
+1
+1: We can kill all monsters with an attack stat of 
+21
+21 as follows:
+
+On the first day, we kill the monster with 
+2
+2 HP. The HP stats of the remaining monsters increase by 
+X
+=
+10
+X=10 each, and will become 
+[
+13
+,
+11
+]
+[13,11].
+On the second day, we kill the monster with 
+13
+13 HP. The HP stat of the remaining monster will increase by 
+10
+10 again, and will be 
+21
+21.
+On the third day, we kill the remaining monster with 
+21
+21 HP.
+It can be proven that we cannot kill all the monsters with an attack stat of less than 
+21
+21, so this is optimal.
+For example, with an attack stat of 
+20
+20, we'll be able to kill any two monsters but on the third day, the remaining monster will have more than 
+20
+20 HP and we'll be unable to kill it.
+
+Test case 
+2
+2: Kill the first monster (with a HP of 
+10
+10). The other monsters can be killed in any order afterwards.
+
+Did you like the problem statement?
+79 users found this helpful
+More Info
+Time limit1 secs
+Memory limit1.5 GB
+Source Limit50000 Bytes
+import java.io.*;
+import java.util.*;
+
+class CodeChef {
+
+    // Fast Input and Output
+    static class FastIO {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastIO() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+
+        void print(String s) {
+            System.out.print(s);
+        }
+
+        void println(String s) {
+            System.out.println(s);
+        }
+    }
+
+    // Debug Function
+    static void debug(Object... o) {
+        System.err.println(Arrays.deepToString(o));
+    }
+
+    // GCD
+    static long gcd(long a, long b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+
+    // LCM
+    static long lcm(long a, long b) {
+        return (a / gcd(a, b)) * b;
+    }
+
+    // Prime Check
+    static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        return true;
+    }
+
+    // Sieve of Eratosthenes
+    static boolean[] sieve(int n) {
+        boolean[] isPrime = new boolean[n + 1];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = isPrime[1] = false;
+        for (int i = 2; i * i <= n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        return isPrime;
+    }
+
+    // Modular Exponentiation
+    static long modExp(long base, long exp, long mod) {
+        long result = 1;
+        base = base % mod;
+        while (exp > 0) {
+            if ((exp & 1) == 1) {
+                result = (result * base) % mod;
+            }
+            base = (base * base) % mod;
+            exp >>= 1;
+        }
+        return result;
+    }
+
+    // Factorial Modulo
+    static long factorialMod(int n, int mod) {
+        long result = 1;
+        for (int i = 2; i <= n; i++) {
+            result = (result * i) % mod;
+        }
+        return result;
+    }
+
+    // Custom Comparator for Sorting
+    static class Pair implements Comparable<Pair> {
+        int first, second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public int compareTo(Pair o) {
+            return Integer.compare(this.first, o.first); // Ascending order by first
+        }
+    }
+
+    // Prefix Sum
+    static int[] prefixSum(int[] arr) {
+        int n = arr.length;
+        int[] prefix = new int[n];
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+        return prefix;
+    }
+
+    // Binary Search
+    static int binarySearch(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) return mid;
+            if (arr[mid] < target) left = mid + 1;
+            else right = mid - 1;
+        }
+        return -1; // Not found
+    }
+
+   public static void main(String[] args) {
+        Scanner io = new Scanner(System.in);
+
+        int t = io.nextInt(); // Number of test cases
+        while (t-- > 0) {
+            long n = io.nextLong(); // Number of elements
+            long k = io.nextLong(); // Number of elements
+            PriorityQueue<Long> pq = new PriorityQueue<>((a, b) -> Long.compare(b, a)); // Max-Heap
+
+            for (int i = 0; i < n; i++) {
+                pq.add(io.nextLong());
+            }
+
+            long ans = 0;
+            long l = 0;
+
+            while (!pq.isEmpty()) {
+                long a = pq.poll(); // Get the largest element
+                ans = Math.max(a + l, ans);
+                l += k;
+            }
+
+            System.out.println(ans); // Output the result
+        }
+        io.close(); // Close the scanner
+    }
+
+    
+}
