@@ -1,0 +1,523 @@
+Stabilize Warwick
+Warwick, a human-turned-beast, has 
+N
+N (
+N
+≥
+3
+N≥3) infusion pumps labelled from 
+1
+1 to 
+N
+N attached to him that pumps a powerful toxin called shimmer. The 
+i
+i-th pump injects shimmer at a pressure of 
+P
+i
+P 
+i
+​
+ .
+
+Warwick wants to ensure that all the pumps are operating at the same pressure. To achieve this, he can perform the following operation:
+
+Choose two indices 
+i
+,
+j
+i,j (
+1
+≤
+i
+,
+j
+≤
+N
+1≤i,j≤N) and set 
+P
+i
+P 
+i
+​
+  to be equal to 
+P
+j
+P 
+j
+​
+ .
+Note that it is allowed to choose 
+i
+=
+j
+i=j.
+However, Warwick's even-indexed pumps are unstable - after every operation he does, each of them will increase their pressure by 
+1
+1.
+That is, after each operation performed, each of 
+P
+2
+,
+P
+4
+,
+P
+6
+,
+…
+P 
+2
+​
+ ,P 
+4
+​
+ ,P 
+6
+​
+ ,… will increase by 
+1
+1.
+
+Is it possible for Warwick to reach a state where all the pumps have the same pressure?
+Note that equality must hold after the final pressure increase of the even-indexed pumps.
+
+If it is possible, also find a sequence of at most 
+4
+N
+4N operations that equalizes all the pressures.
+Note that you do not have to minimize the number of operations used.
+
+It can be proved that if all the pressures can be made equal, it can be done within 
+4
+N
+4N operations.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of two lines of input.
+The first line of each test case contains a single integer 
+N
+N — the number of pumps.
+The second line contains 
+N
+N space-separated integers 
+P
+1
+,
+P
+2
+,
+…
+,
+P
+N
+P 
+1
+​
+ ,P 
+2
+​
+ ,…,P 
+N
+​
+  — the initial pressures of the pumps.
+Output Format
+If no valid sequence of operations exists, print the single integer 
+−
+1
+−1 on a new line.
+
+Otherwise, first print an integer 
+K
+K (
+0
+≤
+K
+≤
+4
+N
+0≤K≤4N) denoting the number of operations you want to perform.
+The next 
+K
+K lines should describe the operations. The 
+i
+i-th of them should contain two space-separated integers 
+x
+i
+x 
+i
+​
+  and 
+y
+i
+y 
+i
+​
+ , meaning that the 
+i
+i-th operation sets the pressure of the 
+x
+i
+x 
+i
+​
+ -th pump equal to that of the 
+y
+i
+y 
+i
+​
+ -th pump, i.e. 
+P
+x
+i
+:
+=
+P
+y
+i
+P 
+x 
+i
+​
+ 
+​
+ :=P 
+y 
+i
+​
+ 
+​
+ .
+
+Constraints
+1
+≤
+T
+≤
+2
+⋅
+1
+0
+5
+1≤T≤2⋅10 
+5
+ 
+3
+≤
+N
+≤
+5
+⋅
+1
+0
+5
+3≤N≤5⋅10 
+5
+ 
+1
+≤
+P
+i
+≤
+1
+0
+9
+1≤P 
+i
+​
+ ≤10 
+9
+ 
+The sum of 
+N
+N over all test cases won't exceed 
+5
+⋅
+1
+0
+5
+5⋅10 
+5
+ .
+Sample 1:
+Input
+Output
+3
+4
+5 1 2 6
+3
+1 1 1
+3
+4 1 4
+4
+4 2
+3 1
+4 2
+2 4
+0
+3
+3 3
+3 3
+3 3
+Explanation:
+Test case 
+1
+1: The pressures of the pumps change as follows:
+
+Initially, they're 
+[
+5
+,
+1
+,
+2
+,
+6
+]
+[5,1,2,6].
+The first move makes 
+P
+4
+P 
+4
+​
+  equal to 
+P
+2
+P 
+2
+​
+ , to get 
+[
+5
+,
+1
+,
+2
+,
+1
+]
+[5,1,2,1]. Then, even-indexed pumps increase their pressure by 
+1
+1 so we have 
+[
+5
+,
+2
+,
+2
+,
+2
+]
+[5,2,2,2].
+The second move makes 
+P
+3
+P 
+3
+​
+  equal to 
+P
+1
+P 
+1
+​
+ , to get 
+[
+5
+,
+2
+,
+5
+,
+2
+]
+[5,2,5,2]. Then, the even-indexed pumps increase their pressure by 
+1
+1 so we have 
+[
+5
+,
+3
+,
+5
+,
+3
+]
+[5,3,5,3].
+The third move makes 
+P
+4
+P 
+4
+​
+  equal to 
+P
+2
+P 
+2
+​
+ , to get 
+[
+5
+,
+3
+,
+5
+,
+3
+]
+[5,3,5,3]. Then, the even-indexed pumps increase their pressure by 
+1
+1 so we have 
+[
+5
+,
+4
+,
+5
+,
+4
+]
+[5,4,5,4].
+The fourth move makes 
+P
+2
+P 
+2
+​
+  equal to 
+P
+4
+P 
+4
+​
+ , to get 
+[
+5
+,
+4
+,
+5
+,
+4
+]
+[5,4,5,4]. Then, the even-indexed pumps increase their pressure by 
+1
+1 so we have 
+[
+5
+,
+5
+,
+5
+,
+5
+]
+[5,5,5,5] and we're done.
+Test case 
+2
+2: The pressures are already equal.
+
+Test case 
+3
+3: The pressure of the second pump rises to make the pressures 
+[
+4
+,
+4
+,
+4
+]
+[4,4,4] after the third operation.
+#include <iostream>
+  #include <cstdlib>
+  #include <stack>
+  #include <queue>
+  #include <vector>
+  #include <algorithm>
+  #include <cmath>
+  #include <iomanip>
+  #include <map>
+  #include <utility>
+  #include <set>
+#define ll long long 
+using namespace std;
+  long long power(long long x, 
+                                    long long y, long long p)
+    {
+        long long res = 1; // Initialize result
+    
+        x = x % p; 
+       
+        while (y > 0) 
+        {
+        
+           
+            if (y & 1)
+                 res = (res * x) % p;
+            y = y >> 1; 
+            x = (x * x) % p;
+        }
+        return res;
+    }
+void bfs(vector<vector<long long> >& adj,long long s,vector<long long>&weight){
+    queue<long long>q;
+    if(weight[s]!=1e9)
+    return;
+    q.push(s);
+    weight[s]=0;
+
+    while(!q.empty()){
+        long long node=q.front();
+        q.pop();
+        for(long long i=0;i<adj[node].size();i++){
+            long long child=adj[node][i];
+            if(weight[node]+1<weight[child])
+            {weight[child]=weight[node]+1;
+            q.push(child);
+            }
+        }
+    }
+}
+
+
+int32_t main(){
+    int t;
+cin>>t;
+while(t--){
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    vector<pair<int,int> >mov;
+    mov.push_back(make_pair(1,2));
+    int x=(n+1)/2+n/2-2;
+    int y=n/2;
+    for(int i=0;i<x;i++){
+         mov.push_back(make_pair(1,1));
+    }
+    mov.push_back(make_pair(3,2));
+    mov.push_back(make_pair(2,1));
+    for(int i=4;i<=n;i+=2){
+        mov.push_back(make_pair(i,2));
+    }
+    mov.push_back(make_pair(1,3));
+    for(int i=5;i<=n;i+=2){
+         mov.push_back(make_pair(i,3));
+    }
+    
+    
+     cout<<mov.size()<<"\n";
+     for(int i=0;i<mov.size();i++)
+     cout<<mov[i].first<<" "<<mov[i].second<<"\n";
+   
+
+   
+}
+}
