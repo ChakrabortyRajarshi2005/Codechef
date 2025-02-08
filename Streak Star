@@ -1,0 +1,318 @@
+Streak Star
+The Streak Value of an array 
+B
+B is defined as the maximum length of a non-decreasing subarray, more formally:
+
+max
+⁡
+1
+≤
+i
+≤
+j
+≤
+N
+(
+j
+−
+i
++
+1
+)
+where
+B
+i
+≤
+B
+i
++
+1
+≤
+B
+i
++
+2
+≤
+⋯
+≤
+B
+j
+.
+1≤i≤j≤N
+max
+​
+ (j−i+1)whereB 
+i
+​
+ ≤B 
+i+1
+​
+ ≤B 
+i+2
+​
+ ≤⋯≤B 
+j
+​
+ .
+Chef has an array 
+A
+A of length 
+N
+N and a magical number 
+X
+X. You are allowed to perform the following operation at most once:
+
+Select an index 
+i
+i, and update the element at 
+A
+i
+A 
+i
+​
+  by multiplying it with 
+X
+X, i.e., set 
+A
+i
+:
+=
+A
+i
+⋅
+X
+A 
+i
+​
+ :=A 
+i
+​
+ ⋅X
+Your task is to find the maximum possible Streak Value achievable for array 
+A
+A.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of multiple lines of input.
+The first line of each test case contains two space-separated integers 
+N
+N and 
+X
+X — the length of array and magical number respectively.
+The second line of each test case contains 
+N
+N space-separated integers 
+A
+1
+,
+A
+2
+,
+A
+3
+.
+.
+.
+A
+N
+A 
+1
+​
+ ,A 
+2
+​
+ ,A 
+3
+​
+ ...A 
+N
+​
+  — the elements of the array.
+Output Format
+For each test case, output on a new line the maximum possible Streak Value of 
+A
+A.
+
+Constraints
+1
+≤
+T
+≤
+1
+0
+3
+1≤T≤10 
+3
+ 
+1
+≤
+N
+,
+X
+≤
+1
+0
+3
+1≤N,X≤10 
+3
+ 
+1
+≤
+A
+i
+≤
+1
+0
+5
+1≤A 
+i
+​
+ ≤10 
+5
+ 
+The sum of 
+N
+N over all test cases won't exceed 
+1
+0
+3
+10 
+3
+ .
+Sample 1:
+Input
+Output
+3
+5 3
+1 2 1 4 2
+3 10
+2 5 3
+4 5
+90 2 5 6
+4
+3
+3
+Explanation:
+Test case 
+1
+1: It is optimal to select index 
+3
+3, which changes the array 
+A
+A to 
+[
+1
+,
+2
+,
+3
+,
+4
+,
+2
+]
+[1,2,3,4,2]. The Streak Value for the array 
+[
+1
+,
+2
+,
+3
+,
+4
+,
+2
+]
+[1,2,3,4,2] is 
+4
+4, as the longest non-decreasing subarray is 
+[
+1
+,
+2
+,
+3
+,
+4
+]
+[1,2,3,4].
+
+Test case 
+2
+2: Its optimal to select index 
+3
+3, which changes the array 
+A
+A to 
+[
+2
+,
+5
+,
+30
+]
+[2,5,30].
+The Streak Value for the array 
+[
+2
+,
+5
+,
+30
+]
+[2,5,30] is 
+3
+3, as the entire array is already non-decreasing.
+
+Test case 
+3
+3: In this case, it is optimal to either not perform any operation or perform the operation on index 
+4
+4, both of which result in a Streak Value of 
+3
+3.
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
+        while(t-->0){
+            int n = s.nextInt();
+            int x = s.nextInt();
+            int a[] = new int[n]; 
+            
+            for (int i=0;i<n;i++) {
+                a[i] = s.nextInt();
+            }
+            int max = 1;
+            for (int i = 0; i < n; i++) {
+                int val = a[i];
+                a[i] = a[i]*x;
+                int len = 1;
+                for (int j = 0; j < n - 1; j++) {
+                    if(a[j]<=a[j+1]){
+                        len++;
+                        max = Math.max(max, len);
+                    }
+                    else{
+                        len = 1;
+                    }
+                }
+                a[i] = val;
+            }
+            System.out.println(max);
+        }
+	}
+}
