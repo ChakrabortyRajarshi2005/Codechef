@@ -1,0 +1,179 @@
+Palindromic Score
+Alice has three types of characters: 
+A
+A, 
+B
+B and 
+C
+C. She is given exactly 
+X
+X copies of 
+A
+A, 
+Y
+Y copies of 
+B
+B, and 
+Z
+Z copies of 
+C
+C. Alice must use all these characters to form a string. She is free to arrange the characters in any order of her choosing.
+
+After Alice forms her string, Bob makes a move. Bob will choose one character type from { 
+A
+A, 
+B
+B, 
+C
+C } and delete all its occurrences from the string.
+
+Alice’s final score is defined as the length of the longest palindromic subsequence of the string after Bob’s deletion. Both players play optimally:
+
+Alice’s goal is to arrange characters to maximize her final score.
+Bob’s goal is to choose a character to delete such that Alice’s score is minimized.
+Determine the maximum achievable score that Alice can obtain through her optimal arrangement of characters.
+
+A palindromic 
+†
+†
+ subsequence is a subsequence which reads the same from left to right and right to left.
+
+†
+†
+  A string 
+T
+T is called a subsequence of another string 
+S
+S if 
+T
+T can be derived from 
+S
+S by deleting zero or more characters without changing the order of the remaining characters.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of three space‐separated integers 
+X
+X, 
+Y
+Y, and 
+Z
+Z — the copies of 
+A
+A, 
+B
+B, and 
+C
+C respectively.
+Output Format
+For each test case, output a single line containing an integer — the maximum achievable score that Alice can obtain through her optimal arrangement of characters.
+
+Constraints
+1
+≤
+T
+≤
+2
+⋅
+1
+0
+3
+1≤T≤2⋅10 
+3
+ 
+0
+≤
+X
+,
+Y
+,
+Z
+≤
+10
+0≤X,Y,Z≤10
+X
++
+Y
++
+Z
+≥
+1
+X+Y+Z≥1
+Sample 1:
+Input
+Output
+3
+3 0 0 
+4 3 0
+2 2 2
+0
+3
+4
+Explanation:
+Test Case 1 : Alice makes the string 
+A
+A
+A
+AAA. Bob removes all occurrences of 
+A
+A. Thus, Alice is left with only the empty string.
+
+Test Case 2 : Alice makes the string 
+B
+B
+B
+A
+A
+A
+A
+BBBAAAA. Bob removes all occurences of 
+A
+A. Thus, Alice is left with 
+B
+B
+B
+BBB, which is a palindrome itself of size 
+3
+3.
+
+Did you like the problem statement?
+34 users found this helpful
+More Info
+Time limit1 secs
+Memory limit1.5 GB
+Source Limit50000 Bytes
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main() {
+
+	int t;
+
+	for(cin>>t;t--;){
+
+	    int a,b,c;
+
+	    cin>>a>>b>>c;
+
+	    
+
+	    int sum1=a+b-(a%2!=0 && b%2!=0);
+
+	    int sum2=b+c-(b%2!=0 && c%2!=0);
+
+	    int sum3=a+c-(a%2!=0 && c%2!=0);
+
+	    
+
+	    cout<<min(sum1,min(sum3,sum2))<<endl;
+
+	}
+
+
+
+}
