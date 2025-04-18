@@ -1,0 +1,66 @@
+IPL
+Chef has already prepared dinner, and it's his favorite time of the day. It's time for a fantastic cricket match tonight.
+
+If the number of runs scored in an over is at least 7, Chef cheers "THALA"; otherwise, he cheers "BOOM".
+
+You are given 
+X
+X, the number of runs scored in the over.
+
+If 
+X
+X is at least 
+7
+7, print THALA.
+Otherwise, print BOOM.
+Input Format
+A single integer 
+X
+X, representing number of runs scored in an over.
+Output Format
+Print THALA if number of runs scored in the over is at least 
+7
+7, otherwise print BOOM.
+You may print each character of the string in uppercase or lowercase (for example, the strings thALa, thala, Thala, and thalA will all be treated as identical).
+
+Constraints
+1
+≤
+X
+≤
+36
+1≤X≤36
+Sample 1:
+Input
+Output
+7
+THALA
+Explanation:
+Since the number of runs scored is at least 
+7
+7, the chef cheers out "THALA".
+Sample 2:
+Input
+Output
+4
+BOOM
+Explanation:
+Since the number of runs scored is less than 
+7
+7, the chef cheers out "BOOM".
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int X;
+    cin>>X;
+
+if(X>=7)
+{
+    cout<<"THALA";
+}
+else
+{
+    cout<<"BOOM";
+}
+}
